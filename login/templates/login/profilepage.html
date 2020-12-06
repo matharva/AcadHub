@@ -42,7 +42,7 @@
 
 .profile .user h2 {
   font-size: 20px;
-  text-transform: capitalize;
+  
   line-height: 20px;
   display: block;
   float: left;
@@ -114,8 +114,12 @@ a:hover {
 </style>
 
 <body>
+    
+    <a href="{% url 'index' %}"><button class="btn btn-outline-danger" style="float: left; height: 35px; width: 50px; background-color: white; border-color: black;">Prev</button></a>
+    
+    <br><br>
     <div class="container">
-        <div class="col">
+        <div class="col" style="border-style: solid; border-width: 1px; border-color: black;">
             <div class="profile clearfix">                            
                 <div class="image" >
                     <img src="/media/slant.jpg" class="img-cover">
@@ -126,7 +130,7 @@ a:hover {
                                           
                     </div>               
                     <br><br><br>  <br><br><br>                         
-                    <h2><p><i>{{user.first_name}} {{user.last_name}}</i></p>  </h2>
+                    <h2><p><i>{{user.username}}</i></p>  </h2>
                     {% if value %}                           
                     <div class="actions">
                         <div class="btn-group">
@@ -143,10 +147,10 @@ a:hover {
                 <table class="center">
                     <tr style="height: 50px;">
                         <td align="center" style="width: 400px;"> 
-                            <h5 style="margin: 4px 0px 0px 60px;">FIRST NAME: <U>      <b> {{user.first_name}}</b> </U></h5>
+                            <h5 style="margin: 4px 0px 0px 60px; text-transform: capitalize;">FIRST NAME: <U>      <b> {{user.first_name}}</b> </U></h5>
                         </td>
                         <td align="center" style="width: 400px;"> 
-                            <h5 style="margin: 4px 0px 0px 60px;">LAST NAME: <U>      <b> {{user.last_name}}</b> </U></h5>
+                            <h5 style="margin: 4px 0px 0px 60px; text-transform: capitalize;">LAST NAME: <U>      <b> {{user.last_name}}</b> </U></h5>
                         </td>
                     </tr>
                     <tr style="height: 50px;">
@@ -166,7 +170,7 @@ a:hover {
                         </td>
                     </tr>
                 </table>                   
-                <br><br><br>
+                <br><br>
                
             </div>
         </div>
@@ -179,7 +183,7 @@ a:hover {
                         <div class="col-md-4">
 
                             <a href="{% url 'postandcomment_app:post' postDetails.id %}" style="text-decoration: none;">
-                                <div class="card mb-3 align-items-center" style="max-width: 1000px; background-color: blanchedalmond; height: 300px; display: flex; justify-content: center; align-items: center;">
+                                <div class="card mb-3 align-items-center" style="max-width: 1000px; background-color: white; height: 300px; display: flex; justify-content: center; align-items: center; border-style: solid; border-width: 1px; border-color: black;">
                                     <div class="row no-gutters" style="text-align: center;">
                                     <div class="col">
                                         <div class="card-body">
@@ -209,7 +213,7 @@ a:hover {
                         <div class="col-md-4">
 
                             <a href="{% url 'postandcomment_app:projectPost' projectpostDetails.id %}" style="text-decoration: none;">
-                                <div class="card mb-3 align-items-center" style="max-width: 1000px; background-color: blanchedalmond; height: 300px; display: flex; justify-content: center; align-items: center;">
+                                <div class="card mb-3 align-items-center" style="max-width: 1000px; background-color: white; height: 300px; display: flex; justify-content: center; align-items: center; border-style: solid; border-width: 1px; border-color: black;">
                                     <div class="row no-gutters" style="text-align: center;">
                                     <div class="col">
                                         <div class="card-body">

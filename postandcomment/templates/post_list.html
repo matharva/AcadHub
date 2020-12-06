@@ -37,9 +37,9 @@ a:hover {
       
     <section style="display: flex; justify-content: center; align-items: center;">
         <div class="container">
-            <h1 align='center' style="display: inline-block;">{{community.name}}</h1>
+            <h1 align='center' style="display: inline-block;"><a href="{% url 'postandcomment_app:com' %}"><button class="btn btn-outline-dark mr-5 mt-3" style="float: left;">Prev</button></a>{{community.name}}</h1>
             {% if request.user.is_authenticated %}
-            <a href="{% url 'postandcomment_app:createPost' community.name %}"><button class="btn btn-outline-danger mr-5 mt-3" style="float: right;">Create Post</button></a>
+            <a href="{% url 'postandcomment_app:createPost' community.name %}"><button class="btn btn-outline-primary mr-5 mt-3" style="float: right;">Create Post</button></a>
             {% endif %}
             <br>
             <legend class="border-bottom mb-4"></legend>
