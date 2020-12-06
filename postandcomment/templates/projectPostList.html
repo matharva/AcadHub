@@ -9,6 +9,29 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
+  <style>
+    body{
+      background-color: blanchedalmond;
+    }
+    .card-tile
+{
+    display:inline;
+}
+
+a:hover {
+    text-decoration: none;
+    
+}
+
+.card {
+    transition: all 0.2s ease-in-out;
+    -webkit-transform: all 0.2s ease-in-out;
+}
+
+.card:hover {
+    -webkit-transform: scale(1.1);
+}
+  </style>
   <body>
       
       
@@ -20,41 +43,45 @@
             {% endif %}
             <br>
             <br>
-            {% for postDetails in posts %}
-            {% if request.user.is_authenticated %}
-            <a href="{% url 'postandcomment_app:projectPost' postDetails.id %}" style="text-decoration: none;">
-                <div class="card mb-3 align-items-center" style="max-width: 1000px;">
-                    <div class="row no-gutters">
-                    <div class="col">
-                        <div class="card-body">
-                        <h5 class="card-title">{{postDetails.title}}</h5>
-                        <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> {{ postDetails.description }}</p>
-                        <p class="card-text"><small class="text-muted">{{postDetails.date_posted}}</small></p>
-                        <p class="card-text"><small class="text-muted">Post by {{postDetails.author}}</small></p>
-                        <p class="card-text"><small class="text-muted">Deadline: {{postDetails.deadline}}</small></p>
-
+            <div class="row">
+                {% for postDetails in posts %}
+                <div class="col-md-4">
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'postandcomment_app:projectPost' postDetails.id %}" style="text-decoration: none; ">
+                        <div class="card mb-3 align-items-center" style="max-width: 1000px; display: flex; justify-content: center; align-items: center; height: 300px;">
+                            <div class="row no-gutters">
+                            <div class="col">
+                                <div class="card-body">
+                                <h5 class="card-title">{{postDetails.title}}</h5>
+                                <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> {{ postDetails.description }}</p>
+                                <p class="card-text"><small class="text-muted">{{postDetails.date_posted}}</small></p>
+                                <p class="card-text"><small class="text-muted">Post by {{postDetails.author}}</small></p>
+                                <p class="card-text"><small class="text-muted">Deadline: {{postDetails.deadline}}</small></p>
+        
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
-                </div>
-            </a>
-            {% else %}
-                <div class="card mb-3 align-items-center" style="max-width: 1000px;">
-                    <div class="row no-gutters">
-                    <div class="col">
-                        <div class="card-body">
-                        <h5 class="card-title">{{postDetails.title}}</h5>
-                        <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> {{ postDetails.description }}</p>
-                        <p class="card-text"><small class="text-muted">{{postDetails.date_posted}}</small></p>
-                        <p class="card-text"><small class="text-muted">Post by {{postDetails.author}}</small></p>
-                        <p class="card-text"><small class="text-muted">Deadline: {{postDetails.deadline}}</small></p>
-
+                    </a>
+                    {% else %}
+                        <div class="card mb-3 align-items-center" style="max-width: 1000px; height: 300px; display: flex; justify-content: center; align-items: center;">
+                            <div class="row no-gutters">
+                            <div class="col">
+                                <div class="card-body">
+                                <h5 class="card-title">{{postDetails.title}}</h5>
+                                <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> {{ postDetails.description }}</p>
+                                <p class="card-text"><small class="text-muted">{{postDetails.date_posted}}</small></p>
+                                <p class="card-text"><small class="text-muted">Post by {{postDetails.author}}</small></p>
+                                <p class="card-text"><small class="text-muted">Deadline: {{postDetails.deadline}}</small></p>
+        
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
+                    {% endif %}
                 </div>
-            {% endif %}
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </section>
     
