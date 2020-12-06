@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import CommentForm, PostForm, CommunityForm
-from .models import Comment, Post, Community
+from .forms import *
+from .models import *
 from login.models import *
 from . import models
 # Create your views here.
@@ -26,8 +26,7 @@ def postView(request, post_id):
       return redirect('postandcomment_app:post', post_id = post_id) 
   else: 
     cf = CommentForm() 
-    
-  
+
   context ={ 
     'postDetails': currentPost,
     'comments': currentPostComments,
@@ -77,7 +76,6 @@ def communityView(request, community_name):
 
   return render(request, 'post_list.html', context)
 
-
 def communityCreateView(request):
   comf = CommunityForm(request.POST)
   if request.method == 'POST':
@@ -100,3 +98,79 @@ def communityListView(request):
     'community': currentCommunity, 
   }
   return render(request, 'com_list.html', context)
+
+def projectListView(request):
+  projects = ProjectPost.objects.all()
+  context = {
+    'posts': projects,
+  }
+  return render(request, 'projectPostList.html', context)
+
+def createProjectPost(request):
+  if request.method == 'POST': 
+    ppf = ProjectPostForm(request.POST or None, request.FILES or None) 
+    if ppf.is_valid():
+      if request.FILES.get('image'):
+        newPost = ProjectPost(image=request.FILES['image'])
+      else:
+        newPost = ProjectPost()
+      newPost.author = request.user
+      newPost.description = ppf.cleaned_data['description']
+      newPost.requirements = ppf.cleaned_data['requirements']
+      newPost.domain = ppf.cleaned_data['domain']
+      newPost.deadline = ppf.cleaned_data['deadline']
+      newPost.link = ppf.cleaned_data['link']
+      newPost.title = ppf.cleaned_data['title']
+      # newPost.image = pf.cleaned_data.get('image', None)
+      newPost.save()
+      newPost.contributors.add(request.user)
+      newPost.save()
+      return redirect('postandcomment_app:projectPost', ppost_id = newPost.id) 
+  else: 
+    ppf = ProjectPostForm() 
+    
+  context = {
+    'post_form':ppf, 
+  } 
+  return render(request, 'newPost.html', context) 
+
+def projectPostView(request, ppost_id):
+  currentPost = ProjectPost.objects.get(id=ppost_id)
+  contributors = currentPost.contributors.all()
+  currentPostComments = PComment.objects.filter(ppost=currentPost).order_by("-ppost_id")
+  currentUserProfile = Profile.objects.get(user=request.user)
+  college = currentUserProfile.college.replace(" ", "")
+  
+  if request.method == 'POST': 
+    if 'comment' in request.POST:
+      pcf = PCommentForm(request.POST or None) 
+      if pcf.is_valid(): 
+        content = request.POST.get('content')
+        comment = PComment.objects.create(ppost = currentPost, user = request.user, content = content) 
+        comment.save() 
+        return redirect('postandcomment_app:projectPost', ppost_id = ppost_id) 
+    else:
+      currentPost.contributors.add(request.user)
+      currentPost.save()
+      pcf = PCommentForm() 
+      contributors = currentPost.contributors.all()
+  else: 
+    pcf = PCommentForm() 
+
+  if request.user in list(contributors):
+    context ={ 
+    'formPresent': 'yes',
+    'postDetails': currentPost,
+    'comments': currentPostComments,
+    'contributors': contributors,
+    'comment_form':pcf, 
+    } 
+  else:
+    context ={ 
+    'formPresent': 'no',
+    'postDetails': currentPost,
+    'contributors': contributors,
+    'comments': currentPostComments,
+    } 
+  
+  return render(request, 'projectPost.html', context)
