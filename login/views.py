@@ -124,11 +124,13 @@ def profilepage(request,name):
 		user = User.objects.get(username = name)
 		profile = Profile.objects.get(user = user)
 		posts = Post.objects.filter(author = user)
+		projectposts = ProjectPost.objects.filter(author = user)
 		context = {
 			'value':value,
 			'user':user,
 			'profile':profile,
-			'posts':posts
+			'posts':posts,
+			'projectposts':projectposts
 		}
 	return render(request, 'login/profilepage.html', context)
 		
