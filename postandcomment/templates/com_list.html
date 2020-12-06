@@ -9,28 +9,37 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
+  <style>
+    body{
+      background-color: blanchedalmond;
+    }
+  </style>
   <body>
-      <section>
-        {% for com in community %}
-        
-        {% if com.name != 'Anonymous' %}
-            <a href="{% url 'postandcomment_app:community' com.name %}" style="text-decoration: none;">
-                <div class="card mb-3 align-items-center" style="max-width: 1000px;">
-                    <div class="row no-gutters">
-                    <div class="col">
-                        <div class="card-body">
-                        <h5 class="card-title">{{com.name}}</h5>
-                        <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> {{ com.description }}</p>
-                        <!-- <p class="card-text"><small class="text-muted">{{postDetails.date_posted}}</small></p>
-                        <p class="card-text"><small class="text-muted">Post by {{postDetails.author}}</small></p> -->
+      <h1 class="display-2" align="center">Communities</h1><br>
+      <section style="display: flex; justify-content: center; align-items: center;">
+        <div class="container">
+            <div class="row">
+            {% for com in community %}
+                {% if com.name != 'Anonymous' %}
+                <div class="col-md-4">
+                    <a href="{% url 'postandcomment_app:community' com.name %}" style="text-decoration: none;">
+                        <div class="card mb-3 align-items-center" style=" height: 300px; display: flex; justify-content: center; align-items: center;">
+                            <div class="row no-gutters">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h3 class="card-title">{{com.name}}</h3>
+                                        <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> {{ com.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
+                    </a>
                 </div>
-            </a>
-        {% endif %}
-        
-        {% endfor %}
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+        </section>
         
       </section>
     <!-- Optional JavaScript -->
