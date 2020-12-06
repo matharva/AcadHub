@@ -10,25 +10,36 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+
+    
+    <h1 class="display-1" align="center">Create a Group</h1>
+    <br>
+    <br>
+    <br>
     <section style="display: flex; justify-content: center; align-items: center;">
-        <form enctype="multipart/form-data" method="POST"> 
-          {% csrf_token %} 
-          <div class="container">
-            <div class="col">
-              <div class="row-1"></div>
-              <div class="row-8"></div>
-              <div class="row-1"></div>
-            </div>
-            <table>{{community_form.as_table}}</table>
-          </div>
-          <br>
-          <div align="center">
-            <input type="submit" name="comment" class="btn btn-warning" >
-          </div>
-          <br><br>
-      
-        </form> 
+      <div class="row">
+          <!-- Form starts -->
+            <form enctype="multipart/form-data" method="POST"> 
+              {% csrf_token %} 
+              <table>{{community_form.as_table}}</table><br>
+    
+              <!-- Button -->
+              <div align="center">
+                <input type="submit" name="comment" class="btn btn-warning" >
+              </div>
+              <!-- Button Ends -->
+    
+              <br><br>
+            </form> 
+          <!-- Form ends -->
+
+      </div>
+        
+
       </section>
+  
+    <!-- Border Container Ends -->
+      
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

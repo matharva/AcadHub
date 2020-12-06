@@ -54,7 +54,7 @@
   
                 {% if request.user.is_authenticated %}
                   <a href="{% url 'postandcomment_app:post' postDetails.id %}" style="text-decoration: none;">
-                      <div class="card mb-3 align-items-center" style="max-width: 1000px;">
+                      <div class="card mb-3 align-items-center" style="max-width: 1000px; height: 300px; display: flex; justify-content: center; align-items: center;">
                           <div class="row no-gutters">
                           <div class="col">
                               <div class="card-body">
@@ -68,7 +68,8 @@
                       </div>
                   </a>
                 {% else %}
-                  <div class="card mb-3 align-items-center" style="max-width: 1000px;">
+
+                  <div class="card mb-3 align-items-center" style="max-width: 1000px; height: 300px; display: flex; justify-content: center; align-items: center;">
                     <div class="row no-gutters">
                     <div class="col">
                         <div class="card-body">
@@ -79,7 +80,7 @@
                         </div>
                     </div>
                     </div>
-                </div>
+                </div> 
                 {% endif %}
               </div>
               {% endfor %}
