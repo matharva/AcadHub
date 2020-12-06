@@ -23,7 +23,7 @@
 /* The hero image */
 .header {
 /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-background-color: black;
+background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80);
 height: 100vh;
 background-position: center;
 background-repeat: no-repeat;
@@ -115,10 +115,10 @@ table {
                 <a class="nav-link" href="{% url 'login_app:logout' %}">Logout</a>
               </li>
               <li class="nav-item mt-3">
-                <a class="nav-link active" href="{% url 'login_app:profile' %}">Profile</a>
+                <a class="nav-link active" href="{% url 'login_app:profilepage' name %}">Profile</a>
               </li>            
             </ul>
-          {% endif %} 
+            {% endif %} 
     </section>
 
 
@@ -131,7 +131,7 @@ table {
       <div class="hero-text">
         <h1 class="display-1">AcadHub</h1>
         <h3 class="display-4">Some Random Text</h3>
-        <button class="btn btn-outline-danger">Button that does something</button>
+        <a href="{% url 'postandcomment_app:com' %}"><button class="btn btn-outline-danger">Explore Communities</button></a>
       </div>
     </section>
 
@@ -140,13 +140,17 @@ table {
         <h2>Community</h2>
         <br>
         <div class="row">
-          <a href=""><div class="col com bg-danger m-2" style="height: 50vh; width: 28vw;">Project</div></a>
+          <a href="/community/Projects"><div class="col com bg-danger m-2" style="height: 50vh; width: 28vw;">Project</div></a>
           <a href=""><div class="col com bg-info m-2" style="height: 50vh; width: 28vw;">Guidance</div></a>
           <a href=""><div class="col com bg-success m-2" style="height: 50vh; width: 28vw;">Innovation</div></a>
         </div>
         <div class="row">
           <a href=""><div class="col com bg-warning m-2" style="height: 50vh; width: 28vw;">Test</div></a>
-          <a href=""><div class="col com bg-primary m-2" style="height: 50vh; width: 28vw;">College Community</div></a>
+          {% if not request.user.is_authenticated %}
+          <a href="{% url 'login_app:login' %}"><div class="col com bg-primary m-2" style="height: 50vh; width: 28vw;">College Community</div></a>
+          {% else %}
+          <a href="{% url 'postandcomment_app:community' college %}"><div class="col com bg-primary m-2" style="height: 50vh; width: 28vw;">College Community</div></a>
+          {% endif %}
           <a href=""><div class="col com bg-dark m-2" style="height: 50vh;  width: 28vw;">Instructor Community</div></a>  
         </div>
       </div>
@@ -159,30 +163,17 @@ table {
         }
       </style>
       
-    </section>
-    <br>
-    <br>
-    <section style="display: flex; justify-content: center; align-items: center;">
-      <div class="container" align="center">
-      <h2>Your Posts</h2>
-      <br>
-      <div class="card mb-3 align-items-center" style="max-width: 850px;">
-        <div class="row no-gutters">
-          <!-- <div class="col-md-4">
-            <img src="..." class="card-img" alt="Some Image">
-          </div> -->
-          <div class="col">
-            <div class="card-body">
-              <h5 class="card-title">Title</h5>
-              <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>
-        </div>
-      </div>
-     
-    </section>
-
+    
+    
+  </section>
+  {% if request.user.is_authenticated %}
+  <br>
+  <div align="center">
+    <a href="{% url 'postandcomment_app:createCommunity' %}"><button class="btn btn-outline-danger" align="center"> Create a Community</button></a>
+  </div>
+  <br>
+  <br>
+    {% endif %} 
 
     
   

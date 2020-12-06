@@ -12,4 +12,4 @@ def index(request):
     else:
         context={}
 
-    return render(request, 'testapp/index.html', context)
+    return render(request, 'index.html', context)
