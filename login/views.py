@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.contrib import messages
 
-#from django.contrib.auth.decorators import login_required dont use it gave errors after logout for revisiting locked urls
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm
 
@@ -26,11 +26,12 @@ def registerPage(request):
 				user.refresh_from_db()
 				# user.userprofile.user = authenticate(username=username, password=password)
 				user.save()
+				first_name = form.cleaned_data.get('first_name')
 				username = form.cleaned_data.get('username')
 				password = form.cleaned_data.get('password1')
 				user = authenticate(username=username, password=password)
 				login(request, user)
-				messages.success(request, 'Account was created for ' + username)
+				messages.success(request, 'Account was created for ' + first_name)
 
 				return redirect('login_app:login')
 			
@@ -50,6 +51,7 @@ def loginPage(request):
 
 			if user is not None:
 				login(request, user)
+				
 				return redirect('index')
 			else:
 				messages.info(request, 'Username OR password is incorrect')
