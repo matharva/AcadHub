@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %} 
+<html> 
+  <head> 
+  <title></title> 
+  </head> 
+<body>   
+  <form enctype="multipart/form-data" method="POST"> 
+    {% csrf_token %} 
+    {{post_form.as_p}} 
+    <input type="submit" name="comment" class="btn btn-warning">
+
+  </form> 
+</body>
