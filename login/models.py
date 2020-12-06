@@ -5,8 +5,14 @@ from PIL import Image
 from django.dispatch import receiver
 from django.core.exceptions import ObjectDoesNotExist
 
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    occupation= models.TextField(blank=True)
+    age = models.IntegerField(default=18)
+    college = models.TextField(blank=True)
+    field_of_study = models.TextField(blank=True)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     def __str__(self):
@@ -22,16 +28,16 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    try:
-        instance.profile.save()
-    except ObjectDoesNotExist:
-        Profile.objects.create(user=instance)
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     try:
+#         instance.profile.save()
+#     except ObjectDoesNotExist:
+#         Profile.objects.create(user=instance)
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    try:
-        instance.profile.save()
-    except ObjectDoesNotExist:
-        Profile.objects.create(user=instance)
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     try:
+#         instance.profile.save()
+#     except ObjectDoesNotExist:
+#         Profile.objects.create(user=instance)

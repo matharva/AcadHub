@@ -1,5 +1,7 @@
 from django import forms 
-from .models import Comment, Post
+from .models import Comment, Post, Community
+
+
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -18,4 +20,8 @@ class CommentForm(forms.ModelForm):
         model = Comment 
         fields =['content']
 
-    
+
+class CommunityForm(forms.ModelForm):
+    class Meta:
+        model = Community
+        fields = ['name', 'description']

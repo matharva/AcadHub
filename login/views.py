@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm
-
+from postandcomment.models import *
 # Create your views here.
 
 
@@ -26,10 +26,30 @@ def registerPage(request):
 				user.refresh_from_db()
 				# user.userprofile.user = authenticate(username=username, password=password)
 				user.save()
+				college = form.cleaned_data.get('college')
+				if college not in list(Profile.objects.values_list('college', flat=True)):
+					newCommunity = Community()
+					newCommunity.name = college.replace(" ", "")
+					newCommunity.description = f"Incognito Community of {college}"
+					newCommunity.save()
+					newCommunity.user.add(user)
+					newCommunity.save()
+				else:
+					community = Community.objects.get(name = college.replace(" ", ""))
+					community.user.add(user)
 				first_name = form.cleaned_data.get('first_name')
 				username = form.cleaned_data.get('username')
 				password = form.cleaned_data.get('password1')
 				user = authenticate(username=username, password=password)
+				
+				profile = Profile()
+				profile.user = user
+				profile.college = form.cleaned_data.get('college')
+				profile.occupation = form.cleaned_data.get('occupation')
+				profile.age = form.cleaned_data.get('age')
+				profile.field_of_study = form.cleaned_data.get('field_of_study')
+				profile.save()
+
 				login(request, user)
 				messages.success(request, 'Account was created for ' + first_name)
 
@@ -38,6 +58,7 @@ def registerPage(request):
 
 		context = {'form':form}
 		return render(request, 'login/register.html', context)
+
 
 def loginPage(request):
 	if request.user.is_authenticated:
@@ -63,9 +84,6 @@ def logoutUser(request):
 	logout(request)
 	return redirect('login_app:login')
 	 
-
-
-
 def profile(request):
 	if request.user.is_authenticated:
 		if request.method == 'POST':
@@ -94,3 +112,23 @@ def profile(request):
 	else:
 		return redirect('index')
 	
+def profilepage(request,name):
+
+	if request.user.is_authenticated:
+
+		if request.user.username != name:
+			value = False
+		else:
+			value = True
+
+		user = User.objects.get(username = name)
+		profile = Profile.objects.get(user = user)
+		posts = Post.objects.filter(author = user)
+		context = {
+			'value':value,
+			'user':user,
+			'profile':profile,
+			'posts':posts
+		}
+	return render(request, 'login/profilepage.html', context)
+		

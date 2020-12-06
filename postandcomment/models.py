@@ -8,6 +8,7 @@ from django.urls import reverse
 
 class Community(models.Model):
     name = models.CharField(max_length=200, default='SomeName')
+    description = models.CharField(max_length=400, blank=True)
     user = models.ManyToManyField(User)
     
 class Post(models.Model):

@@ -9,6 +9,9 @@ urlpatterns = [
     # path('comment/', views.registerPage, name="comment"),
 	path('post/<int:post_id>', views.postView, name="post"),  
     path('createPost/<slug:community_name>', views.postCreateView, name="createPost"),
+    path('community/<slug:community_name>', views.communityView, name="community"),
+    path('createCommunity/', views.communityCreateView, name='createCommunity'),
+    path('community/', views.communityListView, name='com'),
 ]
 
 if settings.DEBUG:

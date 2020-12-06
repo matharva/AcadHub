@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<head>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+</head>
+<style>
+    body{margin-top:20px;}
+
+.profile {
+  width: 100%;
+  position: relative;
+  background: #FFF;
+  border: 1px solid #D5D5D5;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+.profile .image {
+  display: block;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  text-align: center;
+  border: 5px solid #FFF;
+}
+
+.profile .user {
+  position: relative;
+  padding: 0px 5px 5px;
+}
+
+.profile .user .avatar {
+  position: absolute;
+  left: 20px;
+  top: -85px;
+  z-index: 2;
+}
+
+.profile .user h2 {
+  font-size: 20px;
+  text-transform: capitalize;
+  line-height: 20px;
+  display: block;
+  float: left;
+  margin: 4px 0px 0px 60px;
+  font-weight: bold;
+}
+
+.profile .user .actions {
+  float: right;
+}
+
+.profile .user .actions .btn {
+  margin-bottom: 0px;
+}
+
+.profile .info {
+  float: left;
+  margin-left: 20px;
+}
+
+.img-profile{
+    height:200px;
+    width:200px;
+}
+
+.img-cover{
+    width:1200px;
+    height:300px;
+}
+
+@media (max-width: 768px) {
+  .btn-responsive {
+    padding:2px 4px;
+    font-size:80%;
+    line-height: 1;
+    border-radius:3px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .btn-responsive {
+    padding:4px 9px;
+    font-size:90%;
+    line-height: 1.2;
+  }
+}
+</style>
+
+
+<body>
+    <div class="container">
+        <div class="col">
+            <div class="profile clearfix">                            
+                <div class="image" >
+                    <img src="/media/slant.jpg" class="img-cover">
+                </div>                            
+                <div class="user clearfix">
+                    <div class="avatar">
+                        <img src="{{profile.image.url}}" class="img-thumbnail img-profile">
+                                          
+                    </div>               
+                    <br><br><br>  <br><br><br>                         
+                    <h2><p><i>{{user.first_name}} {{user.last_name}}</i></p>  </h2>
+                    {% if value %}                           
+                    <div class="actions">
+                        <div class="btn-group">
+                            <a href="{% url 'login_app:profile' %}"><button class="btn btn-default btn-sm tip btn-responsive" title="" data-original-title="Recommend"><span class="glyphicon glyphicon-share-alt glyphicon glyphicon-white"></span>Update My Profile</button></a>
+                        </div>
+                    </div>       
+                    {% endif %}                                                                                         
+                </div>                          
+                <!--<div class="info" style="display: inline-block;">
+                    <p><span class="glyphicon glyphicon-globe"></span> <span class="title">Address:</span>  St. Revutskogo, Kiev, Ukraine</p>                                    
+                    <p><span class="glyphicon glyphicon-gift"></span> <span class="title">Date of birth:</span> 14.02.1989</p>                                
+                </div>  --> 
+                <br><h3 style="margin: 4px 0px 0px 60px;">  DETAILS:</h3><br>
+                <table class="center">
+                    <tr style="height: 50px;">
+                        <td align="center" style="width: 400px;"> 
+                            <h5 style="margin: 4px 0px 0px 60px;">FIRST NAME: <U>      <b> {{user.first_name}}</b> </U></h5>
+                        </td>
+                        <td align="center" style="width: 400px;"> 
+                            <h5 style="margin: 4px 0px 0px 60px;">LAST NAME: <U>      <b> {{user.last_name}}</b> </U></h5>
+                        </td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td align="center" style="width: 400px;"> 
+                            <h5 style="margin: 4px 0px 0px 60px;">AGE: <U>      <b> {{profile.age}}</b> </U></h5>
+                        </td>
+                        <td align="center" style="width: 400px;"> 
+                            <h5 style="margin: 4px 0px 0px 60px;">INSTITUTE: <U>      <b> {{profile.college}}</b> </U></h5>
+                        </td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td align="center" style="width: 400px;"> 
+                            <h5 style="margin: 4px 0px 0px 60px;">OCCUPATION: <U>      <b> {{profile.occupation}}</b> </U></h5>
+                        </td>
+                        <td align="center" style="width: 400px;"> 
+                            <h5 style="margin: 4px 0px 0px 60px;">FIELD OF STUDY/EXPERTISE: <U>      <b> {{profile.field_of_study}}</b> </U></h5>
+                        </td>
+                    </tr>
+                </table>                   
+                <br><br><br>
+               
+            </div>
+        </div>
+        </div>
+        <section style="display: flex; justify-content: center; align-items: center;">
+            <div class="container" >
+                <h3> MY POSTS:</h3><br>
+                <legend class="border-bottom mb-4"></legend>
+        {% for postDetails in posts %}
+    <a href="{% url 'postandcomment_app:post' postDetails.id %}" style="text-decoration: none;">
+        <div class="card mb-3 align-items-center" style="max-width: 1000px;">
+            <div class="row no-gutters" style="text-align: center;">
+            <div class="col">
+                <div class="card-body">
+                <h5 class="card-title" >{{postDetails.title}}</h5>
+                <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> {{ postDetails.content }}</p>
+                <p class="card-text"><small class="text-muted">{{postDetails.date_posted}}</small></p>
+                <p class="card-text"><small class="text-muted">Post by {{postDetails.author}}</small></p>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+    </a>
+    <legend class="border-bottom mb-4"></legend>
+    {% endfor %}
+            </div>
+    </section>
+</body> 

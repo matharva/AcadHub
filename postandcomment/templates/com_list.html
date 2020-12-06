@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>AcadHub</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,34 +10,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-      
-      
-    <section style="display: flex; justify-content: center; align-items: center;">
-        <div class="container">
-            <h1 align='center' style="display: inline-block;">{{community.name}}</h1>
-            <a href="{% url 'postandcomment_app:createPost' community.name %}"><button class="btn btn-outline-danger mr-5 mt-3" style="float: right;">Create Post</button></a>
-            <br>
-            <br>
-            {% for postDetails in posts %}
-            <a href="{% url 'postandcomment_app:post' postDetails.id %}" style="text-decoration: none;">
+      <section>
+        {% for com in community %}
+        
+        {% if com.name != 'Anonymous' %}
+            <a href="{% url 'postandcomment_app:community' com.name %}" style="text-decoration: none;">
                 <div class="card mb-3 align-items-center" style="max-width: 1000px;">
                     <div class="row no-gutters">
                     <div class="col">
                         <div class="card-body">
-                        <h5 class="card-title">{{postDetails.title}}</h5>
-                        <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> {{ postDetails.content }}</p>
-                        <p class="card-text"><small class="text-muted">{{postDetails.date_posted}}</small></p>
-                        <p class="card-text"><small class="text-muted">Post by {{postDetails.author}}</small></p>
+                        <h5 class="card-title">{{com.name}}</h5>
+                        <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> {{ com.description }}</p>
+                        <!-- <p class="card-text"><small class="text-muted">{{postDetails.date_posted}}</small></p>
+                        <p class="card-text"><small class="text-muted">Post by {{postDetails.author}}</small></p> -->
                         </div>
                     </div>
                     </div>
                 </div>
             </a>
-            {% endfor %}
-        </div>
-    </section>
-    
-
+        {% endif %}
+        
+        {% endfor %}
+        
+      </section>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

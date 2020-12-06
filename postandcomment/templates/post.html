@@ -13,11 +13,21 @@
   <body>
     <section style="display: flex; justify-content: center; align-items: center;">
       <div class="container">
-        <p class="article-content">
-          <img src="{{postDetails.image.url}}" class="imgpost">
-              <small class="text-muted">{{ postDetails.date_posted|date:"F d, Y" }}</small>
-          </p>
-          <h2 class="article-title">{{ postDetails.title }}</h2>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <h2 class="display-4">{{ postDetails.title }}</h2>
+              
+              
+              <h5 class="text-muted"><small>Published on {{ postDetails.date_posted|date:"F d, Y" }}</small> </h5>
+              
+              <h5><small class="text-muted">Author: <a href="{% url 'login_app:profilepage' postDetails.author.username %}">{{postDetails.author.username}}</a></small></h5>
+              <legend class="border-bottom mb-4"></legend>
+              {% if postDetails.image.url != '/media/default.jpg' %}
+                
+                <img src="{{postDetails.image.url}}" class="imgpost">
+              {% endif %}
+                
           {% if postDetails.link != "" %}
               <p class="article-content">
               <a href="{{ postDetails.link }}" target="_blank">{{ postDetails.link }}</a>
@@ -38,10 +48,14 @@
               <blockquote class="blockquote">
                 <p>{{ comment.content}}</p>
                 <footer class="blockquote-footer">
-                  By <cite>{{comment.user|capfirst}}
+                  By <cite><a href="{% url 'login_app:profilepage' comment.user %}">{{comment.user|capfirst}}</a>
                 </footer>
               </blockquote>
             {% endfor %}
+            </div>
+            <div class="col-2"></div>
+          </div>
+          
       </div>
     </section>
     
