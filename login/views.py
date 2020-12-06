@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.contrib import messages
 
-from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.decorators import login_required dont use it gave errors after logout for revisiting locked urls
 from .models import *
 from .forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm
 
