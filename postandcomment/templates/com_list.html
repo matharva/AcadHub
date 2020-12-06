@@ -13,6 +13,24 @@
     body{
       background-color: blanchedalmond;
     }
+    .card-tile
+{
+    display:inline;
+}
+
+a:hover {
+    text-decoration: none;
+    
+}
+
+.card {
+    transition: all 0.2s ease-in-out;
+    -webkit-transform: all 0.2s ease-in-out;
+}
+
+.card:hover {
+    -webkit-transform: scale(1.1);
+}
   </style>
   <body>
       <h1 class="display-2" align="center">Communities</h1><br>
@@ -23,7 +41,7 @@
                 {% if com.name != 'Anonymous' %}
                 <div class="col-md-4">
                     <a href="{% url 'postandcomment_app:community' com.name %}" style="text-decoration: none;">
-                        <div class="card mb-3 align-items-center" style=" height: 300px; display: flex; justify-content: center; align-items: center;">
+                        <div class="card mb-3 align-items-center" style="background-color:white; height: 300px; display: flex; justify-content: center; align-items: center; border-style: solid; border-width: 1px; border-color: black;">
                             <div class="row no-gutters">
                                 <div class="col">
                                     <div class="card-body">
