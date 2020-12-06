@@ -118,7 +118,7 @@ a:hover {
         <div class="col">
             <div class="profile clearfix">                            
                 <div class="image" >
-                    <img src="/media/slant.jpg" class="img-cover">
+                    <img src="/media/outer.jpg" class="img-cover">
                 </div>                            
                 <div class="user clearfix">
                     <div class="avatar">
@@ -170,7 +170,7 @@ a:hover {
                
             </div>
         </div>
-        </div>
+
         <section style="display: flex; justify-content: center; align-items: center;">
             <div class="container" >
                 <h3> MY POSTS:</h3><br>
@@ -186,7 +186,6 @@ a:hover {
                                         <h3 class="card-title" >{{postDetails.title}}</h3>
                                         <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> {{ postDetails.content }}</p>
                                         <p class="card-text"><small class="text-muted">{{postDetails.date_posted}}</small></p>
-                                        <p class="card-text"><small class="text-muted">Post by {{postDetails.author}}</small></p>
                                         </div>
                                     </div>
                                     
@@ -201,4 +200,37 @@ a:hover {
             <br>
             <br>
         </section>
+
+        <section style="display: flex; justify-content: center; align-items: center;">
+            <div class="container" >
+                <h3> MY PROJECTS:</h3><br>
+                <div class="row">
+                    {% for projectpostDetails in projectposts %}
+                        <div class="col-md-4">
+
+                            <a href="{% url 'postandcomment_app:projectPost' projectpostDetails.id %}" style="text-decoration: none;">
+                                <div class="card mb-3 align-items-center" style="max-width: 1000px; background-color: blanchedalmond; height: 300px; display: flex; justify-content: center; align-items: center;">
+                                    <div class="row no-gutters" style="text-align: center;">
+                                    <div class="col">
+                                        <div class="card-body">
+                                        <h3 class="card-title" >{{projectpostDetails.title}}</h3>
+                                        <p class="card-text"> <span><i class="fas fa-thumbs-up"></i></span> {{ projectpostDetails.description }}</p>
+                                        <p class="card-text"><small class="text-muted">{{postDetails.date_posted}}</small></p>
+                                        </div>
+                                    </div>
+                                    
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+        </section>
+
+        </div>
+        
 </body> 

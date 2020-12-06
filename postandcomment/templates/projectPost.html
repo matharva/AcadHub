@@ -37,9 +37,10 @@
           <h3>Domain: {{ postDetails.domain }}</h3> 
           <h3>Requirements: {{ postDetails.requirements }}</h3>
           <h3>Deadline: {{ postDetails.deadline }}</h3>
-          {% for cont in contributors %}
-              <a href="{% url 'login_app:profilepage' cont.username %}">{{ cont.username }}</a>
-          {% endfor %}
+          <h3>
+            Contributors: {% for cont in contributors %} <a href="{% url 'login_app:profilepage' cont.username %}">{{ cont.username }}</a>{% endfor %}
+          </h3>
+          
           {% if formPresent == 'yes' %}
             <form method="POST">
                 {% csrf_token %}
