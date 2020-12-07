@@ -130,7 +130,7 @@ table {
     <section>
       <div class="hero-text">
         <h1 class="display-1">AcadHub</h1>
-        <h3 class="display-4">Some Random Text</h3>
+        <h3 class="display-6">Together we BUILD, Together we GROW</h3>
         <a href="{% url 'postandcomment_app:com' %}"><button class="btn btn-danger">Explore Communities</button></a>
       </div>
     </section>
@@ -141,17 +141,17 @@ table {
         <br>
         <div class="row">
           <a href="{% url 'postandcomment_app:proj' %}"><div class="col com bg-danger m-2" style="height: 50vh; width: 28vw;">Project</div></a>
-          <a href=""><div class="col com bg-info m-2" style="height: 50vh; width: 28vw;">Guidance</div></a>
-          <a href=""><div class="col com bg-success m-2" style="height: 50vh; width: 28vw;">Innovation</div></a>
-        </div>
-        <div class="row">
-          <a href=""><div class="col com bg-warning m-2" style="height: 50vh; width: 28vw;">Test</div></a>
           {% if not request.user.is_authenticated %}
           <a href="{% url 'login_app:login' %}"><div class="col com bg-primary m-2" style="height: 50vh; width: 28vw;">College Community</div></a>
           {% else %}
           <a href="{% url 'postandcomment_app:community' college %}"><div class="col com bg-primary m-2" style="height: 50vh; width: 28vw;">College Community</div></a>
           {% endif %}
-          <a href=""><div class="col com bg-dark m-2" style="height: 50vh;  width: 28vw;">Instructor Community</div></a>  
+          <a href=""><div class="col com bg-dark m-2" style="height: 50vh;  width: 28vw;">Instructor Community</div></a>
+        </div>
+        <div class="row">
+          <a href=""><div class="col com bg-info m-2" style="height: 50vh; width: 28vw;">Guidance</div></a>
+          <a href=""><div class="col com bg-success m-2" style="height: 50vh; width: 28vw;">Innovation</div></a>
+          <a href=""><div class="col com bg-warning m-2" style="height: 50vh; width: 28vw;">Test</div></a>
         </div>
       </div>
 

@@ -33,7 +33,12 @@ a:hover {
 }
   </style>
   <body>
-      <h1 class="display-2" align="center">Communities</h1><br>
+    <a href="{% url 'index' %}"><button class="btn btn-outline-dark mr-5 mt-3" style="float: left;">Prev</button></a>
+    <br><br>
+      <h1 class="display-2" align="center">Communities{% if request.user.is_authenticated %}
+        <a href="{% url 'postandcomment_app:createCommunity' %}"><button class="btn btn-outline-primary" style="float: right;"> Create a Community</button></a>
+        {% endif %} </h1><br>
+      
       <section style="display: flex; justify-content: center; align-items: center;">
         <div class="container">
             <div class="row">
