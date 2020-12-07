@@ -10,13 +10,20 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
+  <style>
+    body{
+      background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+      background-size: cover;
+      color: white;
+    }
+  </style>
   <body>
-    <section style="display: flex; justify-content: center; align-items: center;">
-      <div class="container">
+    <section style="display: flex; justify-content: center; align-items: center; ">
+      <div class="container" >
           <div class="row">
             <div class="col-2"></div>
-            <div class="col-8">
-              <h2 class="display-4">{{ postDetails.title }}</h2>
+            <div class="col-8 my-5" style="border: black 1px solid;">
+              <h2 style="font-size: 4em">{{ postDetails.title }}</h2>
 
               
               <h5 class="text-muted"><small>Published on {{ postDetails.date_posted|date:"F d, Y" }}</small> </h5>
@@ -30,16 +37,16 @@
                 
           {% if postDetails.link != "" %}
               <p class="article-content">
-              <a href="{{ postDetails.link }}" target="_blank">{{ postDetails.link }}</a>
+                <b>Link:</b><a href="{{ postDetails.link }}" target="_blank">  {{ postDetails.link }}</a>
               </p>
           {% endif %}
-          <p class="article-content">{{ postDetails.description }}</p> 
-          <h3>Domain: {{ postDetails.domain }}</h3> 
-          <h3>Requirements: {{ postDetails.requirements }}</h3>
-          <h3>Deadline: {{ postDetails.deadline }}</h3>
-          <h3>
-            Contributors: {% for cont in contributors %} <a href="{% url 'login_app:profilepage' cont.username %}">{{ cont.username }}</a>{% endfor %}
-          </h3>
+          <p class="article-content"><b>Description: </b>  {{ postDetails.description }}</p> 
+          <p> <b>Domain:</b>  {{ postDetails.domain }}</p> 
+          <p> <b>Requirements:</b>  {{ postDetails.requirements }}</p>
+          <p> <b>Deadline:</b>  {{ postDetails.deadline }}</p>
+          <p>
+             <b>Contributors:</b>  {% for cont in contributors %} <a href="{% url 'login_app:profilepage' cont.username %}">{{ cont.username }}</a>{% endfor %}
+          </p>
           
           {% if formPresent == 'yes' %}
             <form method="POST">
@@ -53,12 +60,12 @@
                 </div>
                 
                 {% for comment in comments %}
-                <blockquote class="blockquote">
-                    <p>{{ comment.content}}</p>
-                    <footer class="blockquote-footer">
-                    By <cite><a href="{% url 'login_app:profilepage' comment.user %}">{{comment.user|capfirst}}</a>
-                    </footer>
-                </blockquote>
+                  <blockquote class="blockquote p-2" style="border: black 1px solid;">
+                      <p>{{ comment.content}}</p>
+                      <footer class="blockquote-footer">
+                      By <cite><a href="{% url 'login_app:profilepage' comment.user %}">{{comment.user|capfirst}}</a>
+                      </footer>
+                  </blockquote>
                 {% endfor %}
             {% else %}
             <form method="POST">

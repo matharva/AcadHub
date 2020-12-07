@@ -10,21 +10,28 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
+  <style>
+    body{
+      background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://thumbs.dreamstime.com/z/modern-multicultural-society-concept-crowd-people-group-different-community-isolated-white-background-139167994.jpg);
+      background-size: cover;
+      color: white;
+    }
+  </style>
   <body>
 
-    <a href="{% url 'postandcomment_app:com' %}"><button class="btn btn-outline-danger" style="float: left; height: 35px; width: 50px; background-color: white; border-color: black;">Prev</button></a>
+    <a href="{% url 'postandcomment_app:com' %}"><button class="btn btn-danger mt-4 ml-5" style="float: left;  border-color: black;">Prev</button></a>
     <br><br>
     <section style="display: flex; justify-content: center; align-items: center;">
       <div class="container">
           <div class="row">
             <div class="col-2"></div>
-            <div class="col-8">
-              <h2 class="display-4">{{ postDetails.title }}</h2>
+            <div class="col-8 p-3" style="border: black 1px solid;">
+              <h1 style="font-size: 4em;">{{ postDetails.title }}</h1>
               
               
-              <h5 class="text-muted"><small>Published on {{ postDetails.date_posted|date:"F d, Y" }}</small> </h5>
+              <h5 class="text" style="color: white;"><small>Published on {{ postDetails.date_posted|date:"F d, Y" }}</small> </h5>
               
-              <h5><small class="text-muted">Author: <a href="{% url 'login_app:profilepage' postDetails.author.username %}">{{postDetails.author.username}}</a></small></h5>
+              <h5><small class="text" style="color: white;">Author: <a href="{% url 'login_app:profilepage' postDetails.author.username %}">{{postDetails.author.username}}</a></small></h5>
               <legend class="border-bottom mb-4"></legend>
               {% if postDetails.image.url != '/media/default.jpg' %}
                 
@@ -48,9 +55,9 @@
             </div>
             
             {% for comment in comments %}
-              <blockquote class="blockquote">
+              <blockquote class="blockquote p-2" style="border: black 1px solid;">
                 <p>{{ comment.content}}</p>
-                <footer class="blockquote-footer">
+                <footer class="blockquote-footer" style="color: white;">
                   By <cite><a href="{% url 'login_app:profilepage' comment.user %}">{{comment.user|capfirst}}</a>
                 </footer>
               </blockquote>
