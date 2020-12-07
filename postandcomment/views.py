@@ -216,13 +216,14 @@ def testCreateView(request):
       else:
         newtest = Post()
       newtest.author = request.user
+      newtest.community = Community.objects.get(name='test')
       newtest.content = tpf.cleaned_data['content']
       newtest.category = tpf.cleaned_data['category']
       newtest.link = tpf.cleaned_data['link']
       newtest.title = tpf.cleaned_data['title']
       # newPost.image = pf.cleaned_data.get('image', None)
       newtest.save()
-      return redirect('postandcomment_app:test', post_id = newtest.id) 
+      return redirect('postandcomment_app:tests', test_id = newtest.id) 
   else: 
     tpf = PostForm() 
     
