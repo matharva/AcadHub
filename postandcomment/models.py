@@ -70,3 +70,7 @@ class PComment(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE) 
     content = models.TextField() 
     date = models.DateTimeField(default=timezone.now)
+
+class Test(models.Model):
+    user = models.ManyToManyField(User)
+    testpost = models.ForeignKey(Post, on_delete = models.CASCADE)

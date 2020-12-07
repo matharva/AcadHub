@@ -174,3 +174,59 @@ def projectPostView(request, ppost_id):
     } 
   
   return render(request, 'projectPost.html', context)
+
+def testListView(request):
+  tests = Test.objects.all()
+  posttest = [x.testpost for x in tests]
+  context = {
+    'ptest':posttest,  
+  }
+  return render(request, 'test_list.html', context)
+
+def testView(request, test_id):
+  ptest = Post.objects.get(id=test_id)
+  currentPostComments = Comment.objects.filter(post=ptest)
+  currentUserProfile = Profile.objects.get(user=request.user)
+  college = currentUserProfile.college.replace(" ", "")
+  
+  if request.method == 'POST': 
+    tcf = CommentForm(request.POST or None) 
+    if tcf.is_valid(): 
+      content = request.POST.get('content') 
+      comment = Comment.objects.create(post = ptest, user = request.user, content = content) 
+      comment.save() 
+      return redirect('postandcomment_app:tests', post_id = test_id) 
+  else: 
+    tcf = CommentForm() 
+
+  context ={ 
+    'postDetails': ptest,
+    'comments': currentPostComments,
+    'comment_form':tcf, 
+    } 
+  return render(request, 'test.html', context)
+
+def testCreateView(request):
+  currentUserProfile = Profile.objects.get(user=request.user)
+  if request.method == 'POST': 
+    tpf = PostForm(request.POST or None, request.FILES or None) 
+    if tpf.is_valid():
+      if request.FILES.get('image'):
+        newtest = Post(image=request.FILES['image'])
+      else:
+        newtest = Post()
+      newtest.author = request.user
+      newtest.content = tpf.cleaned_data['content']
+      newtest.category = tpf.cleaned_data['category']
+      newtest.link = tpf.cleaned_data['link']
+      newtest.title = tpf.cleaned_data['title']
+      # newPost.image = pf.cleaned_data.get('image', None)
+      newtest.save()
+      return redirect('postandcomment_app:test', post_id = newtest.id) 
+  else: 
+    tpf = PostForm() 
+    
+  context = {
+    'post_form':tpf, 
+  } 
+  return render(request, 'newtest.html', context)
