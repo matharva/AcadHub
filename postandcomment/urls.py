@@ -15,6 +15,9 @@ urlpatterns = [
     path('createCommunity/', views.communityCreateView, name='createCommunity'),
     path('community/', views.communityListView, name='com'),
     path('projects/', views.projectListView, name='proj'),
+    path('test/', views.testListView, name='test'),
+    path('test/<int:test_id>', views.testView, name="tests"),
+    path('createTest', views.testCreateView, name="createTest"),
 
 ]
 
