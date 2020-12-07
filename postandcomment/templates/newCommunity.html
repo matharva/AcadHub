@@ -9,34 +9,54 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
+  <style>
+    body{
+      background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://thumbs.dreamstime.com/z/modern-multicultural-society-concept-crowd-people-group-different-community-isolated-white-background-139167994.jpg);
+      background-size: cover;
+    }
+
+    .hero-text {
+text-align: center;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: white;
+}
+  </style>
   <body>
 
     
-    <h1 class="display-1" align="center">Create a Group</h1>
+    <h1 style="font-size: 5em; color: white;" align="center">Create a Community</h1>
     <br>
     <br>
     <br>
-    <section style="display: flex; justify-content: center; align-items: center;">
-      <div class="row">
-          <!-- Form starts -->
-            <form enctype="multipart/form-data" method="POST"> 
-              {% csrf_token %} 
-              <table>{{community_form.as_table}}</table><br>
-    
-              <!-- Button -->
-              <div align="center">
-                <input type="submit" name="comment" class="btn btn-warning" >
-              </div>
-              <!-- Button Ends -->
-    
-              <br><br>
-            </form> 
-          <!-- Form ends -->
+    <section style="display: flex; justify-content: center; align-items: center; ">
+      <div class="container" style="display: flex; justify-content: center; align-items: center;">
 
+        <div class="row" >
+            <!-- Form starts -->
+            <section style="background: rgba(204, 204, 204, 0.5);">
+              <form enctype="multipart/form-data" method="POST" style=" border: solid black 1px; " class="p-5 hero-text"> 
+                {% csrf_token %} 
+                <table>{{community_form.as_table}}</table><br>
+      
+                <!-- Button -->
+                <div align="center">
+                  <input type="submit" name="comment" class="btn btn-warning" >
+                </div>
+                <!-- Button Ends -->
+      
+                <br>
+              </form> 
+            </section>
+            <!-- Form ends -->
+  
+        </div>
       </div>
         
 
-      </section>
+    </section>
   
     <!-- Border Container Ends -->
       

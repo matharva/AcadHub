@@ -31,16 +31,31 @@ a:hover {
 .card:hover {
     -webkit-transform: scale(1.1);
 }
+body{
+      background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+      background-size: cover;
+    }
   </style>
   <body>
       
       
     <section style="display: flex; justify-content: center; align-items: center;">
         <div class="container">
-            <h1 align='center' style="display: inline-block;"><a href="{% url 'index' %}"><button class="btn btn-outline-dark mr-5 mt-3" style="float: left;">Prev</button></a>Projects</h1>
-            {% if request.user.is_authenticated %}
-                <a href="{% url 'postandcomment_app:createProjectPost' %}"><button class="btn btn-outline-primary mr-5 mt-3" style="float: right;">Create Project</button></a>
+            <div class="row">
+                <div class="col-4 mt-3">
+                    <a href="{% url 'index' %}"><button class="btn btn-dark mr-5 mt-3" style="float: left;">Prev</button></a>
+                </div>
+                <div class="col-4 mt-1">
+                    <h1 style="display: inline-block; justify-content: center; font-size: 4em; color: white;">Projects</h1>
+                </div>
+                <div class="col-4 mt-3">
+                    {% if request.user.is_authenticated %}
+                <a href="{% url 'postandcomment_app:createProjectPost' %}"><button class="btn btn-primary mr-5 mt-3" style="float: right;">Create Project</button></a>
             {% endif %}
+                </div>
+            </div>
+            
+            
             <br>
             <br>
             <div class="row">
